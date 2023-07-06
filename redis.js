@@ -1,19 +1,11 @@
-const redis = require('redis');
+const Redis = require('ioredis');
 
-const client = redis.createClient({
-    password: 'pInG8jMuBFHuDjFwozKrP3vD4aBkdFEG',
-    socket: {
-        host: 'redis-14046.c302.asia-northeast1-1.gce.cloud.redislabs.com',
-        port: 14046
-    }
-});
+const redis = new Redis({
+    port: 14046, // Redis port
+    host: "redis-14046.c302.asia-northeast1-1.gce.cloud.redislabs.com", // Redis host
+    username: "default", // needs Redis >= 6
+    password: "pInG8jMuBFHuDjFwozKrP3vD4aBkdFEG",
+    db: 0, // Defaults to 0
+  });
 
-client.on('connect', function() {
-  console.log('Redis client connected');
-});
-
-client.on('error', function(err) {
-  console.error('Error connecting to Redis:', err);
-});
-
-module.exports = client;
+module.exports = redis;
