@@ -1,11 +1,18 @@
 const Redis = require('ioredis');
+require('dotenv').config();
+
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
+const USERNAME = process.env.USERNAME;
+const PASSWORD = process.env.PASSWORD;
+const DB = process.env.DB;
 
 const redis = new Redis({
-    port: 14046, // Redis port
-    host: "redis-14046.c302.asia-northeast1-1.gce.cloud.redislabs.com", // Redis host
-    username: "default", // needs Redis >= 6
-    password: "pInG8jMuBFHuDjFwozKrP3vD4aBkdFEG",
-    db: 0, // Defaults to 0
+    port: PORT, // Redis port
+    host: HOST, // Redis host
+    username: USERNAME, // needs Redis >= 6
+    password: PASSWORD,
+    db: DB, // Defaults to 0
   });
 
 module.exports = redis;
