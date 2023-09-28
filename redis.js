@@ -1,19 +1,18 @@
-const redis = require('redis');
+const Redis = require('ioredis');
+require('dotenv').config();
 
-const client = redis.createClient({
-    password: 'pInG8jMuBFHuDjFwozKrP3vD4aBkdFEG',
-    socket: {
-        host: 'redis-14046.c302.asia-northeast1-1.gce.cloud.redislabs.com',
-        port: 14046
-    }
-});
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
+const USERNAME = process.env.USERNAME;
+const PASSWORD = process.env.PASSWORD;
+const DB = process.env.DB;
 
-client.on('connect', function() {
-  console.log('Redis client connected');
-});
+const redis = new Redis({
+    port: PORT, // Redis port
+    host: HOST, // Redis host
+    username: USERNAME, // needs Redis >= 6
+    password: PASSWORD,
+    db: DB, // Defaults to 0
+  });
 
-client.on('error', function(err) {
-  console.error('Error connecting to Redis:', err);
-});
-
-module.exports = client;
+module.exports = redis;
